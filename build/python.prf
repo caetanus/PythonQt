@@ -1,8 +1,8 @@
 # profile to include and link Python
 
-# Change this variable to your python version (2.5, 2.6)
-win32:PYTHON_VERSION=26
-unix:PYTHON_VERSION=2.6
+# Change this variable to your python version (2.5, 2.7)
+win32:PYTHON_VERSION=27
+unix:PYTHON_VERSION=2.7
 
 macx {
   # for macx you need to have the Python development kit installed as framework
@@ -16,12 +16,12 @@ macx {
   # the directory where the python libs are located.
   #
   # When using the prebuild Python installer, this will be:
-  # set PYTHON_PATH = c:\Python26
-  # set PYTHON_LIB  = c:\Python26\libs
+  # set PYTHON_PATH = c:\Python27
+  # set PYTHON_LIB  = c:\Python27\libs
   #
   # When using the python sources, this will be something like:
-  # set PYTHON_PATH = c:\yourDir\Python-2.6.1\
-  # set PYTHON_LIB  = c:\yourDir\Python-2.6.1\PCbuild8\Win32
+  # set PYTHON_PATH = c:\yourDir\Python-2.7.1\
+  # set PYTHON_LIB  = c:\yourDir\Python-2.7.1\PCbuild8\Win32
 
   # check if debug or release
   CONFIG(debug, debug|release) {

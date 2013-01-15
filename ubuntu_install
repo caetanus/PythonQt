@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+"""
+facility to install pythonqt on ubuntu systems
+"""
+import os
+import sys
+from types import FunctionType
+
+def install_dependencies():
+    if need_root(install_dependencies):
+        return
+
+    shell_script =(
+        "apt-get install build-essential",
+        "apt-get install qt4-dev-tools qtcreator qt4-linguist-tools",
+        "apt-get install python-dev"
+    )
+    for i in shell_script:
+        os.system(i)
+
+def compile_pythonqt():
+    shell_script =(
+        "qmake",
+        "make -j2",
+    )
+    for i in shell_script:
+        os.system(i)
+
+def install_pythonqt():
+    if need_root(install_pythonqt):
+        return
+    shell_script =(
+        "make install",
+        "ldconfig"
+    )
+    for i in shell_script:
+        os.system(i)
+
+def compile_extensions():
+    pwd = os.getcwd()
+    os.chdir("extensions")
+    shell_script = (
+        "qmake",
+        "make -j2"
+    )
+    for i in shell_script:
+        os.system(i)
+
+    os.chdir(pwd)
+
+def install_extensions():
+    if need_root(install_extensions):
+        return
+    pwd = os.getcwd()
+    os.chdir("lib")
+    shell_script = (
+        "cp -dpR lib*so* /usr/local/lib",
+        "ldconfig",
+
+    )
+    for i in shell_script:
+        os.system(i)
+    os.chdir(pwd)
+
+def need_root(function):
+    if os.getuid() == 0:
+        return False
+    print "type your sudo password, please."
+    os.system("sudo python %s %s" % (sys.argv[0], function.__name__))
+    
+    return True
+
+def help():
+    print "just run ./ubuntu_install, and watch the show,"
+    print "you may will be asked for your sudo password sometimes."
+
+
+args = {}
+
+for i in globals().keys():
+    g = globals()[i]
+    if type(g) is FunctionType:
+        args[i] = g
+
+if len(sys.argv) > 1:
+    if sys.argv[1] in args:
+        args[sys.argv[1]]()
+    else:
+        help()
+
+else:
+    flow =(
+        install_dependencies,
+        compile_pythonqt,
+        install_pythonqt,
+        compile_extensions,
+        install_extensions
+        )
+    print "welcome to the pythonqt instalator for ubuntu,"
+    print "you may need to type your sudo password sometimes."
+    map(lambda f: f(), flow)
+    
