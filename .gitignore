@@ -1,0 +1,9 @@
+*moc_*.cpp
+lib/
+*.swp
+tests
+generator/pythonqt_generator
+*qrc_*.cpp
+*.o
+Makefile.*
+Makefile
