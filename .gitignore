@@ -1,6 +1,11 @@
 *moc_*.cpp
+doxygen/html/
+doxygen/doxygen.log
 lib/
 *.swp
+*.swo
+*.swm
+*.swn
 tests
 generator/pythonqt_generator
 *qrc_*.cpp
