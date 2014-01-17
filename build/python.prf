@@ -1,5 +1,58 @@
 # profile to include and link Python
 
+<<<<<<< HEAD
+# Change this variable to your python version (2.5, 2.7)
+win32:PYTHON_VERSION=27
+unix:PYTHON_VERSION=2.7
+
+macx {
+  # for macx you need to have the Python development kit installed as framework
+  INCLUDEPATH += /System/Library/Frameworks/Python.framework/Headers
+  LIBS += -F/System/Library/Frameworks -framework Python
+} else:win32 {
+  # for windows install a Python development kit or build Python yourself from the sources
+  # Make sure that you set the environment variable PYTHON_PATH to point to your
+  # python installation (or the python sources/header files when building from source).
+  # Make sure that you set the environment variable PYTHON_LIB to point to
+  # the directory where the python libs are located.
+  #
+  # When using the prebuild Python installer, this will be:
+  # set PYTHON_PATH = c:\Python27
+  # set PYTHON_LIB  = c:\Python27\libs
+  #
+  # When using the python sources, this will be something like:
+  # set PYTHON_PATH = c:\yourDir\Python-2.7.1\
+  # set PYTHON_LIB  = c:\yourDir\Python-2.7.1\PCbuild8\Win32
+
+  # check if debug or release
+  CONFIG(debug, debug|release) {
+    DEBUG_EXT = _d
+  } else {
+    DEBUG_EXT =
+  }
+
+  isEmpty(QMAKE_SH) {
+    #win32:INCLUDEPATH += $(PYTHON_PATH)/PC $(PYTHON_PATH)/include
+    #win32:LIBS += $(PYTHON_LIB)/python$${PYTHON_VERSION}$${DEBUG_EXT}.lib
+  } else {
+    PYTHON_PATH = /home/caetano/tcf_client_deps_win/Python27
+    message(python path is $${PYTHON_PATH})
+    INCLUDEPATH += $${PYTHON_PATH}/PC
+    INCLUDEPATH += $${PYTHON_PATH}/include
+    LIBS += $${PYTHON_PATH}/libs/libpython$${PYTHON_VERSION}$${DEBUG_EXT}.a
+    #win32:QMAKE_CXXFLAGS += $$system(python-config --includes)
+    QMAKE_CXXFLAGS += -L${PYTHON_PATH}/libs
+
+  }
+
+} else:unix {
+  # on linux, python-config is used to autodetect Python.
+  # make sure that you have installed a matching python-dev package.
+
+  LIBS += $$system(python$${PYTHON_VERSION}-config --libs)
+  QMAKE_CXXFLAGS += $$system(python$${PYTHON_VERSION}-config --includes)
+}
+=======
 # Change this variable to your python version (2.5, 2.6)
 win32:PYTHON_VERSION=26
 unix:PYTHON_VERSION=2.6
@@ -40,3 +93,4 @@ macx {
   unix:LIBS += $$system(python$${PYTHON_VERSION}-config --libs)
   unix:QMAKE_CXXFLAGS += $$system(python$${PYTHON_VERSION}-config --includes)
 }
+>>>>>>> e1f1c77d9675c3c5fb1cba19d2a32ace483eda2c
