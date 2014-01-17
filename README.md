@@ -23,7 +23,7 @@ Prerequisites
 Build instructions
 ------------------
 
-By default, the `patched-2` version will be checked out.
+By default, the `patched-3` version will be checked out.
 
 ```
 git clone git://github.com/commontk/PythonQt.git
@@ -37,12 +37,18 @@ Additional configure options are:
 
 * `CMAKE_BUILD_TYPE`:  Debug, Release, RelWithDebInfo or MinSizeRel
 * `PythonQt_DEBUG`: Enable/Disable PythonQt debug output
+* `PythonQt_Wrap_QtAll`: Make all Qt components available in python
 * `PythonQt_Wrap_Qt<componentname>`: Build PythonQt wrapper associated with `<componentname>`. Possible `<componentname>` are `gui`, `network`, `opengl`, `sql`, `uitools`, `webkit`, `xml`, `xmlpatterns`.
 
 Available branches
 ------------------
 
 This repository contains three branches:
+* Based on [r244](http://pythonqt.svn.sourceforge.net/viewvc/pythonqt?view=revision&revision=244)
+
+### patched-3
+* Backported:
+ * Most of the [change specific to](https://github.com/commontk/PythonQt/compare/e2dce4b...patched-2) `patched-2` branch have been backported upstream: [r241](http://pythonqt.svn.sourceforge.net/viewvc/pythonqt?view=revision&revision=241), [r242](http://pythonqt.svn.sourceforge.net/viewvc/pythonqt?view=revision&revision=242), [r243](http://pythonqt.svn.sourceforge.net/viewvc/pythonqt?view=revision&revision=243)
 
 ### patched-2
 

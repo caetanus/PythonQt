@@ -102,6 +102,9 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
     //    declareFunctionMetaTypes(s, functions, registeredTypeNames);
     //    s << endl;
   }
+  if (meta_class->qualifiedCppName().contains("Ssl")) {
+    s << "#ifndef QT_NO_OPENSSL"  << endl;
+  }
 
   if (meta_class->generateShellClass()) {
 
@@ -122,9 +125,9 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
       AbstractMetaArgumentList args = fun->arguments();
 
       s << "if (_wrapper) {" << endl;
-      s << "  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, \"" << fun->name() << "\");" << endl;
-      s << "  PyErr_Clear();" << endl;
-      s << "  if (obj && !PythonQtSlotFunction_Check(obj)) {" << endl;
+      s << "  static PyObject* name = PyString_FromString(\"" << fun->name() << "\");" << endl;
+      s << "  PyObject* obj = PyBaseObject_Type.tp_getattro((PyObject*)_wrapper, name);" << endl;
+      s << "  if (obj) {" << endl;
       s << "    static const char* argumentList[] ={\"";
       if (hasReturnValue) {
         // write the arguments, return type first
@@ -173,6 +176,8 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
       } else {
         s << "    return;" << endl;
       }
+      s << "  } else {" << endl;
+      s << "    PyErr_Clear();" << endl;
       s << "  }" << endl;
       s << "}" << endl;
 
@@ -311,6 +316,9 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
 
   writeInjectedCode(s, meta_class);
 
+  if (meta_class->qualifiedCppName().contains("Ssl")) {
+    s << "#endif"  << endl;
+  }
 }
 
 void ShellImplGenerator::writeInjectedCode(QTextStream &s, const AbstractMetaClass *meta_class)

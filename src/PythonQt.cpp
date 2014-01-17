@@ -61,13 +61,24 @@ int       PythonQt::_uniqueModuleCount = 0;
 void PythonQt_init_QtGuiBuiltin(PyObject*);
 void PythonQt_init_QtCoreBuiltin(PyObject*);
 
+
+PyObject* PythonQtConvertFromStringRef(const void* inObject, int /*metaTypeId*/)
+{
+  return PythonQtConv::QStringToPyObject(((QStringRef*)inObject)->toString());
+}
+
 void PythonQt::init(int flags, const QByteArray& pythonQtModuleName)
 {
   if (!_self) {
     _self = new PythonQt(flags, pythonQtModuleName);
+    
+    PythonQt::priv()->setupSharedLibrarySuffixes();
 
     PythonQtMethodInfo::addParameterTypeAlias("QObjectList", "QList<QObject*>");
     qRegisterMetaType<QList<QObject*> >("QList<void*>");
+
+    int stringRefId = qRegisterMetaType<QStringRef>("QStringRef");
+    PythonQtConv::registerMetaTypeToPythonConverter(stringRefId, PythonQtConvertFromStringRef);
 
     PythonQtRegisterToolClassesTemplateConverter(int);
     PythonQtRegisterToolClassesTemplateConverter(float);
@@ -202,8 +213,6 @@ PythonQt::PythonQt(int flags, const QByteArray& pythonQtModuleName)
   Py_INCREF(&PythonQtStdInRedirectType);
 
   initPythonQtModule(flags & RedirectStdOut, pythonQtModuleName);
-
-  _p->setupSharedLibrarySuffixes();
 
 }
 
@@ -407,8 +416,11 @@ PyObject* PythonQtPrivate::wrapPtr(void* ptr, const QByteArray& name)
       QObject* qptr = (QObject*)ptr;
       // if the object is a derived object, we want to switch the class info to the one of the derived class:
       if (name!=(qptr->metaObject()->className())) {
-        registerClass(qptr->metaObject());
         info = _knownClassInfos.value(qptr->metaObject()->className());
+        if (!info) {
+          registerClass(qptr->metaObject());
+          info = _knownClassInfos.value(qptr->metaObject()->className());
+        }
       }
       wrap = createNewPythonQtInstanceWrapper(qptr, info);
       //    mlabDebugConst("MLABPython","new qobject wrapper added " << " " << wrap->_obj->className() << " " << wrap->classInfo()->wrappedClassName().latin1());
@@ -675,17 +687,23 @@ PythonQtObjectPtr PythonQt::importModule(const QString& name)
 
 QVariant PythonQt::evalCode(PyObject* object, PyObject* pycode) {
   QVariant result;
-  this->resetErrorFlag();
+  clearError();
   if (pycode) {
     PyObject* dict = NULL;
+    PyObject* globals = NULL;
     if (PyModule_Check(object)) {
       dict = PyModule_GetDict(object);
+      globals = dict;
     } else if (PyDict_Check(object)) {
       dict = object;
+      globals = dict;
+    } else {
+      dict = PyObject_GetAttrString(object, "__dict__");
+      globals = PyObject_GetAttrString(PyImport_ImportModule(PyString_AS_STRING(PyObject_GetAttrString(object, "__module__"))),"__dict__");
     }
     PyObject* r = NULL;
     if (dict) {
-      r = PyEval_EvalCode((PyCodeObject*)pycode, dict , dict);
+      r = PyEval_EvalCode((PyCodeObject*)pycode, globals , dict);
     }
     if (r) {
       result = PythonQtConv::PyObjToQVariant(r);
@@ -704,7 +722,7 @@ QVariant PythonQt::evalScript(PyObject* object, const QString& script, int start
   QVariant result;
   PythonQtObjectPtr p;
   PyObject* dict = NULL;
-  this->resetErrorFlag();
+  clearError();
   if (PyModule_Check(object)) {
     dict = PyModule_GetDict(object);
   } else if (PyDict_Check(object)) {
@@ -724,7 +742,7 @@ QVariant PythonQt::evalScript(PyObject* object, const QString& script, int start
 void PythonQt::evalFile(PyObject* module, const QString& filename)
 {
   PythonQtObjectPtr code = parseFile(filename);
-  this->resetErrorFlag();
+  clearError();
   if (code) {
     evalCode(module, code);
   } else {
@@ -736,7 +754,7 @@ PythonQtObjectPtr PythonQt::parseFile(const QString& filename)
 {
   PythonQtObjectPtr p;
   p.setNewRef(PythonQtImport::getCodeFromPyc(filename));
-  this->resetErrorFlag();
+  clearError();
   if (!p) {
     handleError();
   }
@@ -1011,22 +1029,22 @@ QStringList PythonQt::introspectType(const QString& typeName, ObjectType type)
   return results;
 }
 
-QVariant PythonQt::call(PyObject* object, const QString& name, const QVariantList& args)
+QVariant PythonQt::call(PyObject* object, const QString& name, const QVariantList& args, const QVariantMap& kwargs)
 {
   PythonQtObjectPtr callable = lookupCallable(object, name);
   if (callable) {
-    return call(callable, args);
+    return call(callable, args, kwargs);
   } else {
     return QVariant();
   }
 }
 
-QVariant PythonQt::call(PyObject* callable, const QVariantList& args)
+QVariant PythonQt::call(PyObject* callable, const QVariantList& args, const QVariantMap& kwargs)
 {
   QVariant r;
   PythonQtObjectPtr result;
-  result.setNewRef(callAndReturnPyObject(callable, args));
-  this->resetErrorFlag();
+  result.setNewRef(callAndReturnPyObject(callable, args, kwargs));
+  clearError();
   if (result) {
     r = PythonQtConv::PyObjToQVariant(result);
   } else {
@@ -1035,31 +1053,54 @@ QVariant PythonQt::call(PyObject* callable, const QVariantList& args)
   return r;
 }
 
-PyObject* PythonQt::callAndReturnPyObject(PyObject* callable, const QVariantList& args)
+PyObject* PythonQt::callAndReturnPyObject(PyObject* callable, const QVariantList& args, const QVariantMap& kwargs)
 {
   PyObject* result = NULL;
   if (callable) {
+    bool err = false;
     PythonQtObjectPtr pargs;
     int count = args.size();
-    if (count>0) {
+    if ((count > 0) || (kwargs.count() > 0)) { // create empty tuple if kwargs are given
       pargs.setNewRef(PyTuple_New(count));
-    }
-    bool err = false;
-    // transform QVariants to Python
-    for (int i = 0; i < count; i++) {
-      PyObject* arg = PythonQtConv::QVariantToPyObject(args.at(i));
-      if (arg) {
-        // steals reference, no unref
-        PyTuple_SetItem(pargs, i,arg);
-      } else {
-        err = true;
-        break;
+
+      // transform QVariant arguments to Python
+      for (int i = 0; i < count; i++) {
+        PyObject* arg = PythonQtConv::QVariantToPyObject(args.at(i));
+        if (arg) {
+          // steals reference, no unref
+          PyTuple_SetItem(pargs, i,arg);
+        } else {
+          err = true;
+          break;
+        }
       }
     }
-
     if (!err) {
-      PyErr_Clear();
-      result = PyObject_CallObject(callable, pargs);
+      if (kwargs.isEmpty()) {
+        // do a direct call if we have no keyword arguments
+        PyErr_Clear();
+        result = PyObject_CallObject(callable, pargs);
+      } else {
+        // convert keyword arguments to Python
+        PythonQtObjectPtr pkwargs;
+        pkwargs.setNewRef(PyDict_New());
+        QMapIterator<QString, QVariant> it(kwargs);
+        while (it.hasNext()) {
+          it.next();
+          PyObject* arg = PythonQtConv::QVariantToPyObject(it.value());
+          if (arg) {
+            PyDict_SetItemString(pkwargs, it.key().toLatin1().constData(), arg);
+          } else {
+            err = true;
+            break;
+          }
+        }
+        if (!err) {
+          // call with arguments and keyword arguments
+          PyErr_Clear();
+          result = PyObject_Call(callable, pargs, pkwargs);
+        }
+      }
     }
   }
   return result;
@@ -1120,8 +1161,8 @@ PythonQtPrivate::PythonQtPrivate()
   _wrappedCB = NULL;
   _currentClassInfoForClassWrapperCreation = NULL;
   _profilingCB = NULL;
-  _ErrorOccured = false;
-  _SystemExitExceptionHandlerEnabled = false;
+  _hadError = false;
+  _systemExitExceptionHandlerEnabled = false;
 }
 
 void PythonQtPrivate::setupSharedLibrarySuffixes()
@@ -1185,7 +1226,7 @@ void PythonQtPrivate::addDecorators(QObject* o, int decoTypes)
       } else if (qstrncmp(m.signature(), "static_", 7)==0) {
         if ((decoTypes & StaticDecorator) == 0) continue;
         QByteArray signature = m.signature();
-        QByteArray nameOfClass = signature.mid(signature.indexOf('_')+1);
+        QByteArray nameOfClass = signature.mid(7);
         nameOfClass = nameOfClass.mid(0, nameOfClass.indexOf('_'));
         PythonQtClassInfo* classInfo = lookupClassInfoAndCreateIfNotPresent(nameOfClass);
         PythonQtSlotInfo* newSlot = new PythonQtSlotInfo(NULL, m, i, o, PythonQtSlotInfo::ClassDecorator);
@@ -1282,7 +1323,7 @@ bool PythonQt::handleError()
   bool flag = false;
   if (PyErr_Occurred()) {
 
-    if (PythonQt::priv()->_SystemExitExceptionHandlerEnabled &&
+    if (_p->_systemExitExceptionHandlerEnabled &&
         PyErr_ExceptionMatches(PyExc_SystemExit)) {
       int exitcode = custom_system_exit_exception_handler();
       emit PythonQt::self()->systemExitExceptionRaised(exitcode);
@@ -1307,37 +1348,28 @@ bool PythonQt::handleError()
       }
     flag = true;
   }
-  PythonQt::priv()->_ErrorOccured = flag;
+  _p->_hadError = flag;
   return flag;
 }
 
-bool PythonQt::errorOccured()const
+bool PythonQt::hadError()const
 {
-  return PythonQt::priv()->_ErrorOccured;
+  return _p->_hadError;
 }
 
-void PythonQt::resetErrorFlag()
+void PythonQt::clearError()
 {
-  if (PythonQt::self())
-    {
-    PythonQt::priv()->_ErrorOccured = false;
-    }
+  _p->_hadError = false;
 }
 
 void PythonQt::setSystemExitExceptionHandlerEnabled(bool value)
 {
-  if (PythonQt::self())
-    {
-    PythonQt::priv()->_SystemExitExceptionHandlerEnabled = value;
-    }
+  _p->_systemExitExceptionHandlerEnabled = value;
 }
 
-bool PythonQt::systemExitExceptionHandlerEnabled()const
+bool PythonQt::systemExitExceptionHandlerEnabled() const
 {
-  if (PythonQt::self())
-    {
-    return PythonQt::priv()->_SystemExitExceptionHandlerEnabled;
-    }
+  return _p->_systemExitExceptionHandlerEnabled;
 }
 
 void PythonQt::addSysPath(const QString& path)
@@ -1665,7 +1697,7 @@ PythonQtInstanceWrapper* PythonQtPrivate::findWrapperAndRemoveUnused(void* obj)
 PythonQtObjectPtr PythonQtPrivate::createModule(const QString& name, PyObject* pycode)
 {
   PythonQtObjectPtr result;
-  PythonQt::self()->resetErrorFlag();
+  PythonQt::self()->clearError();
   if (pycode) {
     result.setNewRef(PyImport_ExecCodeModule((char*)name.toLatin1().data(), pycode));
   } else {
@@ -1845,4 +1877,16 @@ void PythonQtPrivate::shellClassDeleted( void* shellClass )
   // if the wrapper is a QObject, we do not handle this here,
   // it will be handled by the QPointer<> to the QObject, which becomes NULL
   // via the QObject destructor.
+}
+
+PyObject* PythonQtPrivate::wrapMemoryAsBuffer( const void* data, Py_ssize_t size )
+{
+  // P3K port needed later on!
+  return PyBuffer_FromMemory((void*)data, size);
+}
+
+PyObject* PythonQtPrivate::wrapMemoryAsBuffer( void* data, Py_ssize_t size )
+{
+  // P3K port needed later on!
+  return PyBuffer_FromReadWriteMemory(data, size);
 }
