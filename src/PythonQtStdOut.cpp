@@ -93,8 +93,8 @@ static PyObject *PythonQtStdOutRedirect_flush(PyObject * /*self*/, PyObject * /*
 
 static PyObject *PythonQtStdOutRedirect_isatty(PyObject * /*self*/, PyObject * /*args*/)
 {
-  long res = 0;
-  return PyBool_FromLong(res);
+  Py_INCREF(Py_False);
+  return Py_False;
 }
 
 static PyMethodDef PythonQtStdOutRedirect_methods[] = {
@@ -104,7 +104,7 @@ static PyMethodDef PythonQtStdOutRedirect_methods[] = {
   "flush the output, currently not implemented but needed for logging framework"
   },
   {"isatty", (PyCFunction)PythonQtStdOutRedirect_isatty,   METH_NOARGS,
-   "return False since this object is not a tty-like device. Needed for logging framework"
+  "return False since this object is not a tty-like device. Needed for logging framework"
   },
   {NULL,    NULL, 0 , NULL} /* sentinel */
 };

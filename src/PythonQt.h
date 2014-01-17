@@ -356,13 +356,13 @@ public:
   //@{
 
   //! call the given python \c callable in the scope of object, returns the result converted to a QVariant
-  QVariant call(PyObject* object, const QString& callable, const QVariantList& args = QVariantList());
+  QVariant call(PyObject* object, const QString& callable, const QVariantList& args = QVariantList(), const QVariantMap& kwargs = QVariantMap());
 
   //! call the given python object, returns the result converted to a QVariant
-  QVariant call(PyObject* callable, const QVariantList& args = QVariantList());
+  QVariant call(PyObject* callable, const QVariantList& args = QVariantList(), const QVariantMap& kwargs = QVariantMap());
 
   //! call the given python object, returns the result as new PyObject
-  PyObject* callAndReturnPyObject(PyObject* callable, const QVariantList& args = QVariantList());
+  PyObject* callAndReturnPyObject(PyObject* callable, const QVariantList& args = QVariantList(), const QVariantMap& kwargs = QVariantMap());
 
   //@}
 
@@ -473,33 +473,32 @@ public:
   //! get access to internal data (should not be used on the public API, but is used by some C functions)
   static PythonQtPrivate* priv() { return _self->_p; }
 
-  //! handle a python error, call this when a python function fails. If no error occurred, it returns false.
-  //! The error is currently just output to the python stderr, future version might implement better trace printing
-  bool handleError();
-
   //! clear all NotFound entries on all class infos, to ensure that
   //! newly loaded wrappers can add methods even when the object was wrapped by PythonQt before the wrapper was loaded
   void clearNotFoundCachedMembers();
 
-  //! return \a True if \a handleError() has been called and an error occured.
-  bool errorOccured()const;
+  //! handle a python error, call this when a python function fails. If no error occurred, it returns false.
+  //! The error is currently just output to the python stderr, future version might implement better trace printing
+  bool handleError();
 
-  //! reset error flag. After calling this, errorOccured() will return False.
-  //! \sa PythonQt::errorOccured()
-  void resetErrorFlag();
+  //! return \a true if \a handleError() has been called and an error occured.
+  bool hadError()const;
 
-  //! if set to True, signal will be emitted if exception SystemExit is caught
-  //! \sa PythonQt::handleError(), PythonQt::
+  //! reset error flag. After calling this, hadError() will return false.
+  //! \sa hadError()
+  void clearError();
+
+  //! if set to true, the systemExitExceptionRaised signal will be emitted if exception SystemExit is caught
+  //! \sa handleError()
   void setSystemExitExceptionHandlerEnabled(bool value);
 
-  //! return \a True if SystemExit exception is handled by PythonQt
+  //! return \a true if SystemExit exception is handled by PythonQt
   //! \sa setSystemExitExceptionHandlerEnabled()
-  bool systemExitExceptionHandlerEnabled()const;
+  bool systemExitExceptionHandlerEnabled() const;
 
-
-  //! set a callback that is called when a QObject with parent == NULL is wrapped by pythonqt
+  //! set a callback that is called when a QObject with parent == NULL is wrapped by PythonQt
   void setQObjectWrappedCallback(PythonQtQObjectWrappedCB* cb);
-  //! set a callback that is called when a QObject with parent == NULL is no longer wrapped by pythonqt
+  //! set a callback that is called when a QObject with parent == NULL is no longer wrapped by PythonQt
   void setQObjectNoLongerWrappedCallback(PythonQtQObjectNoLongerWrappedCB* cb);
 
   //! call the callback if it is set
@@ -607,6 +606,12 @@ public:
 
   //! wrap the given ptr into a Python object (or return existing wrapper!) if there is a known QObject of that name or a known wrapper in the factory
   PyObject* wrapPtr(void* ptr, const QByteArray& name);
+
+  //! create a read-only buffer object from the given memory
+  static PyObject* wrapMemoryAsBuffer(const void* data, Py_ssize_t size);
+
+  //! create a read-write buffer object from the given memory
+  static PyObject* wrapMemoryAsBuffer(void* data, Py_ssize_t size);
 
   //! registers a QObject derived class to PythonQt (this is implicitly called by addObject as well)
   /* Since Qt4 does not offer a way to detect if a given classname is derived from QObject and thus has a QMetaObject,
@@ -729,8 +734,8 @@ private:
   int _initFlags;
   int _PythonQtObjectPtr_metaId;
 
-  bool _ErrorOccured;
-  bool _SystemExitExceptionHandlerEnabled;
+  bool _hadError;
+  bool _systemExitExceptionHandlerEnabled;
 
   friend class PythonQt;
 };
