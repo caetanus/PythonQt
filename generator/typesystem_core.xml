@@ -31,27 +31,7 @@
           }
     </template><template name="core.convert_stringref_to_string">
             QString %out% = %in%.toString();
-    </template><rejection class="QTextCodec::ConverterState"/><rejection class="QTextCodecFactoryInterface"/><rejection class="QAbstractEventDispatcher"/><rejection class="QAbstractFileEngine"/><rejection class="QAbstractFileEngineHandler"/><rejection class="QAbstractFileEngineIterator"/><rejection class="QFSFileEngine"/><rejection class="QSystemLocale"/><rejection class="QFutureWatcherBase"/><rejection class="QFutureSynchronizer"/><enum-type name="QXmlStreamReader::Error"/><enum-type name="QXmlStreamReader::TokenType"/>
-  
-  <primitive-type name="qgl_GLsizeiptr"/>
-  <primitive-type name="qgl_GLintptr"/>
-  <primitive-type name="GLint"/>
-  <primitive-type name="GLuint"/>
-  <primitive-type name="GLenum"/>
-  <primitive-type name="GLclampf"/>
-  <primitive-type name="GLsizei"/>
-  <primitive-type name="GLfloat"/>
-  <primitive-type name="GLbitfield"/>
-  <primitive-type name="GLbyte"/>
-  <primitive-type name="GLshort"/>
-  <primitive-type name="GLubyte"/>
-  <primitive-type name="GLushort"/>
-  <primitive-type name="GLdouble"/>
-  <primitive-type name="GLclampd"/>
-  <primitive-type name="GLvoid"/>
-  <primitive-type name="GLboolean"/>
-
-  <primitive-type name="bool"/><primitive-type name="double"/><primitive-type name="qreal"/><primitive-type name="float"/><primitive-type name="qint64"/><primitive-type name="__int64"/><primitive-type name="unsigned __int64"/><primitive-type name="unsigned long long"/><primitive-type name="long long"/><primitive-type name="qlonglong"/><primitive-type name="qulonglong"/><primitive-type name="short"/><primitive-type name="short"/><primitive-type name="signed short"/><primitive-type name="ushort"/><primitive-type name="unsigned short"/><primitive-type name="char"/><primitive-type name="signed char"/><primitive-type name="uchar"/><primitive-type name="unsigned char"/><primitive-type name="int"/><primitive-type name="signed int"/><primitive-type name="uint"/><primitive-type name="ulong"/><primitive-type name="unsigned int"/><primitive-type name="signed long"/><primitive-type name="long"/><primitive-type name="unsigned long"/><primitive-type name="WId"/><primitive-type name="Qt::HANDLE"/><primitive-type name="QVariant::Type"/><primitive-type name="QByteRef"/><primitive-type name="QBitRef"/><primitive-type name="QBool"/><primitive-type name="jobject"/><primitive-type name="quintptr"/><suppress-warning text="WARNING(MetaJavaBuilder) :: signal 'finished' in class 'QProcess' is overloaded."/><suppress-warning text="WARNING(MetaJavaBuilder) :: missing required class for enums: QRegExp"/><suppress-warning text="WARNING(MetaJavaBuilder) :: enum 'QtValidLicenseForScriptToolsModule' does not have a type entry or is not an enum"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Rejected enum has no alternative...: QDataStream::Qt_4_5"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unhandled enum value: Qt::MatchFlags(Qt::MatchStartsWith in Qt::MatchFlag"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unhandled enum value: Qt::MatchWrap) in Qt::MatchFlag"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unmatched enum Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap) when parsing default value of 'match' in class 'QAbstractItemModel'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unsupported default value 'QLatin1String(defaultConnection)' of argument in function '*', class '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Class '*' has equals operators but no qHash() function"/><suppress-warning text="WARNING(MetaJavaBuilder) :: type '*' is specified in typesystem, but not defined. This could potentially lead to compilation errors."/><suppress-warning text="WARNING(MetaJavaBuilder) :: namespace '*' for enum '*' is not declared"/><suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function '*', unmatched parameter type '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function '*', unmatched return type '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: signature '*' for function modification in '*' not found. Possible candidates: "/><suppress-warning text="WARNING(MetaJavaBuilder) :: namespace '*' does not have a type entry"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unsupported default value '*' of argument in function '*', class '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Shadowing: * and *; Java code will not compile"/><suppress-warning text="WARNING(MetaJavaBuilder) :: enum '*' is specified in typesystem, but not declared"/>
+    </template><rejection class="QTextCodec::ConverterState"/><rejection class="QTextCodecFactoryInterface"/><rejection class="QAbstractEventDispatcher"/><rejection class="QAbstractFileEngine"/><rejection class="QAbstractFileEngineHandler"/><rejection class="QAbstractFileEngineIterator"/><rejection class="QFSFileEngine"/><rejection class="QSystemLocale"/><rejection class="QFutureWatcherBase"/><rejection class="QFutureSynchronizer"/><enum-type name="QXmlStreamReader::Error"/><enum-type name="QXmlStreamReader::TokenType"/><primitive-type name="bool"/><primitive-type name="double"/><primitive-type name="qreal"/><primitive-type name="float"/><primitive-type name="qint64"/><primitive-type name="__int64"/><primitive-type name="unsigned __int64"/><primitive-type name="unsigned long long"/><primitive-type name="long long"/><primitive-type name="qlonglong"/><primitive-type name="qulonglong"/><primitive-type name="short"/><primitive-type name="short"/><primitive-type name="signed short"/><primitive-type name="ushort"/><primitive-type name="unsigned short"/><primitive-type name="char"/><primitive-type name="signed char"/><primitive-type name="uchar"/><primitive-type name="unsigned char"/><primitive-type name="int"/><primitive-type name="signed int"/><primitive-type name="uint"/><primitive-type name="ulong"/><primitive-type name="unsigned int"/><primitive-type name="signed long"/><primitive-type name="long"/><primitive-type name="unsigned long"/><primitive-type name="WId"/><primitive-type name="Qt::HANDLE"/><primitive-type name="QVariant::Type"/><primitive-type name="QByteRef"/><primitive-type name="QBitRef"/><primitive-type name="QBool"/><primitive-type name="jobject"/><primitive-type name="quintptr"/><suppress-warning text="WARNING(MetaJavaBuilder) :: signal 'finished' in class 'QProcess' is overloaded."/><suppress-warning text="WARNING(MetaJavaBuilder) :: missing required class for enums: QRegExp"/><suppress-warning text="WARNING(MetaJavaBuilder) :: enum 'QtValidLicenseForScriptToolsModule' does not have a type entry or is not an enum"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Rejected enum has no alternative...: QDataStream::Qt_4_5"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unhandled enum value: Qt::MatchFlags(Qt::MatchStartsWith in Qt::MatchFlag"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unhandled enum value: Qt::MatchWrap) in Qt::MatchFlag"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unmatched enum Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap) when parsing default value of 'match' in class 'QAbstractItemModel'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unsupported default value 'QLatin1String(defaultConnection)' of argument in function '*', class '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Class '*' has equals operators but no qHash() function"/><suppress-warning text="WARNING(MetaJavaBuilder) :: type '*' is specified in typesystem, but not defined. This could potentially lead to compilation errors."/><suppress-warning text="WARNING(MetaJavaBuilder) :: namespace '*' for enum '*' is not declared"/><suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function '*', unmatched parameter type '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function '*', unmatched return type '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: signature '*' for function modification in '*' not found. Possible candidates: "/><suppress-warning text="WARNING(MetaJavaBuilder) :: namespace '*' does not have a type entry"/><suppress-warning text="WARNING(MetaJavaBuilder) :: unsupported default value '*' of argument in function '*', class '*'"/><suppress-warning text="WARNING(MetaJavaBuilder) :: Shadowing: * and *; Java code will not compile"/><suppress-warning text="WARNING(MetaJavaBuilder) :: enum '*' is specified in typesystem, but not declared"/>
 
   <value-type name="QModelIndex"/>
   <rejection class="*" function-name="d_func"/>
@@ -291,6 +271,7 @@
   <rejection class="QHashNode"/>
   <rejection class="QInternal"/>
   <rejection class="QIncompatibleFlag"/>
+  <rejection class="QLibrary"/>
   <rejection class="QLinkedList"/>
   <rejection class="QLinkedListData"/>
   <rejection class="QLinkedListIterator"/>
@@ -302,7 +283,13 @@
   <rejection class="QMapPayloadNode"/>
   <rejection class="QMapData"/>
   <rejection class="QMapIterator"/>
+  <rejection class="QMetaType"/>
   <rejection class="QMetaTypeId"/>
+  <rejection class="QMetaProperty"/>
+  <rejection class="QMetaObject"/>
+  <rejection class="QMetaClassInfo"/>
+  <rejection class="QMetaMethod"/>
+  <rejection class="QMetaEnum"/>
   <rejection class="QMultiHash"/>
   <rejection class="QMultiMap"/>
   <rejection class="QMutableHashIterator"/>
@@ -318,11 +305,13 @@
   <rejection class="QPluginLoader"/>
   <rejection class="QPointer"/>
   <rejection class="QReadLocker"/>
+  <rejection class="QResource"/>
   <rejection class="QSet"/>
   <rejection class="QSetIterator"/>
   <rejection class="QSharedData"/>
   <rejection class="QSharedDataPointer"/>
   <rejection class="QStack"/>
+  <rejection class="QSysInfo"/>
   <rejection class="QTextStreamManipulator"/>
   <rejection class="QThreadStorage"/>
   <rejection class="QThreadStorageData"/>
@@ -361,6 +350,7 @@
 
   <rejection class="QLocale::Data"/>
   <rejection class="QGlobalStaticDeleter"/>
+  <rejection class="QSharedMemory"/> <!-- Temporarily until we know how to implement it in Java -->
   <rejection class="QVarLengthArray"/>
 
   <!-- DBus -->
@@ -481,15 +471,7 @@
   <enum-type name="Qt::RenderHint"/>
   <enum-type name="Qt::TileRule"/>
   <enum-type name="Qt::TouchPointState" flags="Qt::TouchPointStates"/>
-  <enum-type name="QSysInfo::Endian"/>
-  <enum-type name="QSysInfo::Sizes"/>
-  <enum-type name="QMetaMethod::Access"/>
-  <enum-type name="QMetaMethod::Attributes"/>
-  <enum-type name="QMetaMethod::MethodType"/>
-  <enum-type name="QSharedMemory::AccessMode"/>
-  <enum-type name="QSharedMemory::SharedMemoryError"/>
-  <enum-type name="QElapsedTimer::ClockType"/>
-  
+
   <enum-type name="QtMsgType">
     <reject-enum-value name="QtSystemMsg"/>
   </enum-type>
@@ -515,16 +497,11 @@
   <enum-type name="QFile::FileError"/>
   <enum-type name="QFile::MemoryMapFlags"/>
   <enum-type name="QFile::Permission" flags="QFile::Permissions"/>
-  <enum-type name="QFile::FileHandleFlag" flags="QFile::FileHandleFlags"/>
   <enum-type name="QIODevice::OpenModeFlag" flags="QIODevice::OpenMode"/>
   <enum-type name="QLibraryInfo::LibraryLocation"/>
-  <enum-type name="QLibrary::LoadHint" flags="QLibrary::LoadHints"/>
   <enum-type name="QLocale::FormatType"/>
   <enum-type name="QLocale::NumberOption" flags="QLocale::NumberOptions"/>
   <enum-type name="QLocale::MeasurementSystem"/>
-  <enum-type name="QLocale::QuotationStyle"/>
-  <enum-type name="QLocale::Script"/>
-  <enum-type name="QLocale::CurrencySymbolFormat"/>
   <enum-type name="QMutex::RecursionMode"/>
   <enum-type name="QProcess::ExitStatus"/>
   <enum-type name="QProcess::ProcessChannel"/>
@@ -573,9 +550,6 @@
   <enum-type name="Qt::FocusPolicy"/>
   <enum-type name="Qt::FocusReason"/>
   <enum-type name="Qt::GlobalColor"/>
-  <enum-type name="Qt::GestureType"/>
-  <enum-type name="Qt::GestureFlag" flags="Qt::GestureFlags"/>
-  <enum-type name="Qt::CursorMoveStyle"/>
   <enum-type name="Qt::HitTestAccuracy"/>
   <enum-type name="Qt::InputMethodQuery"/>
   <enum-type name="Qt::ItemFlag" flags="Qt::ItemFlags"/>
@@ -731,6 +705,18 @@
     <modify-function signature="getRect(int*,int*,int*,int*)const">
       <remove/>
     </modify-function>
+    <modify-function signature="operator&amp;=(QRect)">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator|=(QRect)">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator&amp;(QRect)const">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator|(QRect)const">
+      <remove/>
+    </modify-function>
 
     <modify-function signature="intersect(const QRect&amp;)const" remove="all"/>
     <!--### Obsolete in 4.3-->
@@ -743,6 +729,18 @@
       <remove/>
     </modify-function>
     <modify-function signature="getRect(double*,double*,double*,double*)const">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator&amp;=(QRectF)">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator|=(QRectF)">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator&amp;(QRectF)const">
+      <remove/>
+    </modify-function>
+    <modify-function signature="operator|(QRectF)const">
       <remove/>
     </modify-function>
 
@@ -1163,7 +1161,12 @@
   
     <inject-code class="pywrap-h">
   PyObject* data(QByteArray* b) {
-    return PyString_FromStringAndSize(b-&gt;data(), b-&gt;size());
+    if (b-&gt;data()) {
+      return PyString_FromStringAndSize(b-&gt;data(), b-&gt;size());
+    } else {
+      Py_INCREF(Py_None);
+      return Py_None;
+    }
   }
     </inject-code>
   
@@ -1545,6 +1548,10 @@
     </modify-function>
     <modify-function signature="connectNotify(const char *)" remove="all"/>
     <modify-function signature="disconnectNotify(const char *)" remove="all"/>
+  
+    <!-- ### modify to return value by pointer? -->
+    <modify-function signature="buffer()const" remove="all"/>
+    <modify-function signature="data()const" remove="all"/>
 
     <modify-function signature="setData(const char*,int)" remove="all"/>
   </object-type>
@@ -1695,12 +1702,6 @@
         </conversion-rule>            
       </modify-argument>
     </modify-function>
-
-    <!-- These are already decorated in PythonQt Std Decorators, do not generate them! -->
-    <modify-function signature="parent()const" remove="all"/>
-    <modify-function signature="setParent(QObject*)" remove="all"/>
-    <modify-function signature="property(const char*)const" remove="all"/>
-    <modify-function signature="setProperty(const char*,QVariant)" remove="all"/>
   </object-type>
 
   <object-type name="QCoreApplication">
@@ -1721,7 +1722,6 @@
     <modify-function signature="QCoreApplication(int &amp;, char  **)">
       <access modifier="private"/>
     </modify-function>
-    <modify-function signature="QCoreApplication(int &amp;, char  **, int)" remove="all"/>
     <modify-function signature="removePostedEvents(QObject*)">
       <modify-argument index="1">
         <reference-count action="ignore"/>
@@ -1823,9 +1823,6 @@
   <object-type name="QDynamicPropertyChangeEvent" polymorphic-id-expression="%1-&gt;type() == QEvent::DynamicPropertyChange"/>
 
   <object-type name="QDataStream">
-    <extra-includes>
-      <include file-name="PythonQtConversion.h" location="global"/>
-    </extra-includes>
     <modify-function signature="setDevice(QIODevice*)">
       <modify-argument index="1">
         <reference-count action="set" variable-name="__rcDevice"/>
@@ -1883,78 +1880,185 @@
       <modify-function signature="operator&gt;&gt;(signed char&amp;)" remove="all"/>
       <modify-function signature="operator&lt;&lt;(signed char)" remove="all"/>
 
-      <modify-function signature="operator&lt;&lt;(bool)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(unsigned char)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(int)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(qint64)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(float)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(double)" remove="all"/> 
-      <modify-function signature="operator&lt;&lt;(short)" remove="all"/> 
+      <modify-function signature="operator&lt;&lt;(bool)"> 
+          <rename to="writeBoolean"/> 
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function>
+      <modify-function signature="operator&lt;&lt;(unsigned char)">  
+          <modify-argument index="0" replace-value="this"/>
+          <rename to="writeByte"/> 
+      </modify-function>
+      <modify-function signature="operator&lt;&lt;(int)">
+          <rename to="writeInt"/>  
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function>
+      <modify-function signature="operator&lt;&lt;(qint64)">
+          <rename to="writeLongLong"/> 
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function>
+      <modify-function signature="operator&lt;&lt;(float)"> 
+          <rename to="writeFloat"/>  
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function>
+      <modify-function signature="operator&lt;&lt;(double)"> 
+          <rename to="writeDouble"/>  
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function> 
+      <modify-function signature="operator&lt;&lt;(short)">
+          <rename to="writeShort"/>  
+          <modify-argument index="0" replace-value="this"/>
+      </modify-function>
 
-      <modify-function signature="operator&gt;&gt;(bool &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(unsigned char &amp;)" remove="all"/>   
-      <modify-function signature="operator&gt;&gt;(int &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(uint &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(qint64 &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(unsigned long long &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(float &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(double &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(short &amp;)" remove="all"/> 
-      <modify-function signature="operator&gt;&gt;(unsigned short &amp;)" remove="all"/> 
-
-      <inject-code class="pywrap-h">
-   QString readQString(QDataStream* d) { QString r; (*d) &gt;&gt; r; return r; }
-   QString readString(QDataStream* d) { QString r; (*d) &gt;&gt; r; return r; }
-   QChar readQChar(QDataStream* d) { QChar r; (*d) &gt;&gt; r; return r; }
-   QStringList readQStringList(QDataStream* d) { QStringList r; (*d) &gt;&gt; r; return r; }
-   QVariant readQVariant(QDataStream* d) { QVariant r; (*d) &gt;&gt; r; return r; }
-   bool readBool(QDataStream* d) { bool r; (*d) &gt;&gt; r; return r; }
-   qint8 readInt8(QDataStream* d) { qint8 r; (*d) &gt;&gt; r; return r; }
-   quint8 readUInt8(QDataStream* d) { quint8 r; (*d) &gt;&gt; r; return r; }
-   qint16 readInt16(QDataStream* d) { qint16 r; (*d) &gt;&gt; r; return r; }
-   quint16 readUInt16(QDataStream* d) { quint16 r; (*d) &gt;&gt; r; return r; }
-   qint32 readInt32(QDataStream* d) { qint32 r; (*d) &gt;&gt; r; return r; }
-   quint32 readUInt32(QDataStream* d) { quint32 r; (*d) &gt;&gt; r; return r; }
-   qint64 readInt64(QDataStream* d) { qint64 r; (*d) &gt;&gt; r; return r; }
-   quint64 readUInt64(QDataStream* d) { quint64 r; (*d) &gt;&gt; r; return r; }
-   float readFloat(QDataStream* d) { float r; (*d) &gt;&gt; r; return r; }
-   double readDouble(QDataStream* d) { double r; (*d) &gt;&gt; r; return r; }
-
-   void writeQString(QDataStream* d, const QString&amp; v) { (*d) &lt;&lt; v; }
-   void writeString(QDataStream* d, const QString&amp; v) { (*d) &lt;&lt; v; }
-   void writeQChar(QDataStream* d, const QChar&amp; v) { (*d) &lt;&lt; v; }
-   void writeQStringList(QDataStream* d, const QStringList&amp; v) { (*d) &lt;&lt; v; }
-   void writeQVariant(QDataStream* d, const QVariant&amp; v) { (*d) &lt;&lt; v; }
-   void writeBool(QDataStream* d, bool v) { (*d) &lt;&lt; v; }
-   void writeInt8(QDataStream* d, qint8 v) { (*d) &lt;&lt; v; }
-   void writeUInt8(QDataStream* d, quint8 v) { (*d) &lt;&lt; v; }
-   void writeInt16(QDataStream* d, qint16 v) { (*d) &lt;&lt; v; }
-   void writeUInt16(QDataStream* d, quint16 v) { (*d) &lt;&lt; v; }
-   void writeInt32(QDataStream* d, qint32 v) { (*d) &lt;&lt; v; }
-   void writeUInt32(QDataStream* d, quint32 v) { (*d) &lt;&lt; v; }
-   void writeInt64(QDataStream* d, qint64 v) { (*d) &lt;&lt; v; }
-   void writeUInt64(QDataStream* d, quint64 v) { (*d) &lt;&lt; v; }
-   void writeFloat(QDataStream* d, float v) { (*d) &lt;&lt; v; }
-   void writeDouble(QDataStream* d, double v) { (*d) &lt;&lt; v; }
-
-   int writeRawData(QDataStream* d, PyObject* o) {
-     bool ok;
-     QByteArray r = PythonQtConv::PyObjGetBytes(o, false, ok);
-     return (*d).writeRawData(r.constData(), r.size());
-   }
-
-   PyObject* readRawData(QDataStream* d, int len) {
-     QByteArray r;
-     r.resize(len);
-     int result = d-&gt;readRawData(r.data(), r.size());
-     if (result&gt;=0) {
-       return PyString_FromStringAndSize(r.data(), result);
-     } else {
-       Py_INCREF(Py_None);
-       return Py_None;
-     }
-   }
-    </inject-code>
+      <modify-function signature="operator&gt;&gt;(bool &amp;)"> 
+          <rename to="readBoolean"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            bool __result;
+            bool &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            bool %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(unsigned char &amp;)">  
+          <rename to="readByte"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            unsigned char __result;
+            unsigned char &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            int %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(int &amp;)">
+          <rename to="readInt"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            int __result;
+            int &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            int %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(uint &amp;)">
+          <rename to="readUInt"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            uint __result;
+            uint &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            uint %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(qint64 &amp;)">
+          <rename to="readLongLong"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            qint64 __result;
+            qint64 &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            qint64 %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(unsigned long long &amp;)">
+          <rename to="readULongLong"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            unsigned long long __result;
+            unsigned long long &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            unsigned long long %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(float &amp;)"> 
+          <rename to="readFloat"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            float __result;
+            float &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            float %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(double &amp;)"> 
+          <rename to="readDouble"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            double __result;
+            double &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            double %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function> 
+      <modify-function signature="operator&gt;&gt;(short &amp;)">
+          <rename to="readShort"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            short __result;
+            short &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            short %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
+      <modify-function signature="operator&gt;&gt;(unsigned short &amp;)">
+          <rename to="readUShort"/>
+          <modify-argument index="1">
+            <remove-argument/>
+            <conversion-rule class="native">
+            unsigned short __result;
+            unsigned short &amp; %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+          <modify-argument index="0" replace-value="void">
+            <conversion-rule class="native">
+            unsigned short %out% = __result;
+            </conversion-rule>            
+          </modify-argument>
+      </modify-function>
   </object-type>
 
   <object-type name="QFSFileEngine">
@@ -2279,18 +2383,6 @@
   <object-type name="QtJambiFutureIterator" generic-class="yes" java-name="QFutureIterator"/>
   <object-type name="QRunnable"/>
 
-  <object-type name="QSysInfo"/>
-  <object-type name="QLibrary"/>
-  <object-type name="QResource"/>
-  <object-type name="QSharedMemory"/>
-  <object-type name="QMetaObject"/>
-  <object-type name="QMetaMethod"/>
-  <object-type name="QMetaEnum"/>
-  <object-type name="QMetaProperty"/>
-  <object-type name="QMetaClassInfo"/>
-  <object-type name="QElapsedTimer"/>
-  <object-type name="QMetaType"/>
-
   <!-- Inefficient hash codes -->
   <suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QUuid' has equals operators but no qHash() function. Hashcode of objects will consistently be 0."/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QLocale' has equals operators but no qHash() function. Hashcode of objects will consistently be 0."/>
@@ -2307,6 +2399,7 @@
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type 'std::*'"/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type '*Private\*'"/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type '*Private&amp;'"/>
+  <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type 'QMetaObject'"/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type 'FILE\*'"/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type 'QByteArray::Data\*'"/>
   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping * unmatched *type 'QTSMFC'"/>

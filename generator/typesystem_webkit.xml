@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<typesystem package="com.trolltech.qt.webkit">
-<rejection class="WebCore"/>
-<suppress-warning text="WARNING(MetaJavaBuilder) :: skipping field 'QWebPluginFactory_Plugin::mimeTypes' with unmatched type 'QList&lt;MimeType&gt;'"/>
+<typesystem package="com.trolltech.qt.webkit"><rejection class="WebCore"/><suppress-warning text="WARNING(MetaJavaBuilder) :: skipping field 'QWebPluginFactory_Plugin::mimeTypes' with unmatched type 'QList&lt;MimeType&gt;'"/>
     <namespace-type name="WebCore"/>
 
     <enum-type name="QWebSettings::FontFamily"/>
@@ -10,11 +8,6 @@
     <enum-type name="QWebSettings::WebAttribute">
         <reject-enum-value name="LocalStorageEnabled"/>
     </enum-type>
-
-    <enum-type name="QWebFrame::RenderLayer"/>
-
-    <enum-type name="QWebPage::Feature"/>
-    <enum-type name="QWebPage::PermissionPolicy"/>
     <enum-type name="QWebPage::Extension"/>
     <enum-type name="QWebPage::NavigationType"/>
     <enum-type name="QWebPage::WebAction"/>
@@ -28,9 +21,6 @@
     </enum-type>
     <enum-type name="QWebPage::ErrorDomain"/>
     
-    <object-type name="QWebHistory"/>    
-    <object-type name="QWebHistoryItem"/>    
-    <value-type name="QWebElementCollection"/>    
     
     <object-type name="QGraphicsWebView"/>    
     <object-type name="QWebView">
@@ -101,6 +91,7 @@
 
     <value-type name="QWebPluginInfo"/>
     <value-type name="QWebElement"/>
+    <value-type name="QWebElementCollection"/>
     <value-type name="QWebPluginFactory::Plugin"/>
     <value-type name="QWebPluginFactory::MimeType"/>
     <value-type name="QWebSecurityOrigin">

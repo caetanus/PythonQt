@@ -42,9 +42,23 @@
 */
 //----------------------------------------------------------------------------------
 
-#include "PythonQt.h"
 #include <QVariant>
 #include <QTextEdit>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QKeyEvent>
+#include <QApplication>
+#include <QTextDocumentFragment>
+#include <QTextBlock>
+#include <QTextCursor>
+#include <QDebug>
+#include <QCompleter>
+#include <QStringListModel>
+#include <QScrollBar>
+#include <QColor>
+#include <QPalette>
+
+#include "PythonQt.h"
 
 class QCompleter;
 

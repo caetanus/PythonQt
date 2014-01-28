@@ -12,8 +12,9 @@ DESTDIR    = ../lib
 
 CONFIG += qt dll
 CONFIG -= flat
+QT += core gui widgets
 
-include ( ../build/common.prf )  
-include ( ../build/python.prf )  
+include ( ../build/common.prf )
+include ( ../build/python.prf )
 
-include ( src.pri )  
+include ( src.pri )

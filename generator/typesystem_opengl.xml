@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
-<typesystem package="com.trolltech.qt.opengl"><rejection class="QGL"/>
-
- 
-
+<typesystem package="com.trolltech.qt.opengl"><rejection class="QGL"/><rejection class="QGLFormat"/>
   <rejection class="QGLColormap::QGLColormapData"/>
   <rejection class="QGLWidget" function-name="setMouseTracking"/>
 
@@ -12,11 +9,6 @@
   <enum-type name="QGLContext::BindOption" flags="QGLContext::BindOptions"/>
   <enum-type name="QGLShader::ShaderTypeBit" flags="QGLShader::ShaderType"/>
 
-  <enum-type name="QGLBuffer::Access"/>
-  <enum-type name="QGLBuffer::Type"/>
-  <enum-type name="QGLBuffer::UsagePattern"/>
-  <enum-type name="QGLFunctions::OpenGLFeature"/>
-  <enum-type name="QGLFormat::OpenGLContextProfile"/>
 
   <namespace-type name="QGL">
      <include file-name="qgl.h" location="global"/>
@@ -35,8 +27,6 @@
   </value-type>
 
   <value-type name="QGLFramebufferObjectFormat"/>
-  <object-type name="QGLFunctions"/>
-  <object-type name="QGLBuffer"/>
   <object-type name="QGLShader"/>
   <object-type name="QGLShaderProgram">
     <!-- Should be disambiguated later by fixing the native pointer API -->

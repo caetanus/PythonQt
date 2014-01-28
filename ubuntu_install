@@ -1,0 +1,149 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+facility to install pythonqt on ubuntu systems
+"""
+import os
+import glob
+import sys
+import re
+
+from types import FunctionType
+
+LIB_PATH = '/usr/local/lib/'
+
+
+def install_dependencies():
+    if need_root(install_dependencies):
+        return
+    shell_script = (
+        "apt-get install build-essential",
+        "apt-get install qt4-dev-tools qtcreator qt4-linguist-tools",
+        "apt-get install python-dev",
+    )
+    for i in shell_script:
+        os.system(i)
+
+
+def compile_pythonqt():
+    shell_script = (
+        "qmake",
+        "make -j6",
+    )
+    for i in shell_script:
+        os.system(i)
+
+
+def install_pythonqt():
+    if need_root(install_pythonqt):
+        return
+    shell_script = (
+        "make install",
+        "ldconfig -v"
+    )
+    for i in shell_script:
+        os.system(i)
+
+
+def compile_extensions():
+    with chdir('extensions'):
+        shell_script = (
+            "qmake",
+            "make -j6"
+        )
+        for i in shell_script:
+            os.system(i)
+
+
+def install_extensions():
+    if need_root(install_extensions):
+        return
+    shell_script = (
+        "cp -dpR lib/lib*so* %s" % LIB_PATH,
+        "ldconfig -v",
+    )
+    for i in shell_script:
+        os.system(i)
+
+
+def config_debug():
+    if need_root(config_debug):
+        return
+    os.system("apt-get install libqt-.*-dbg")
+    os.system("apt-get install libqt4-.*-dbg")
+    # clean old libs
+    for lib in glob.glob("lib/lib*so*"):
+        os.unlink(lib)
+    # generate new libs
+    os.system("qmake -config DEBUG && make -j6")
+    with chdir('lib'):
+        for lib in glob.glob('lib*so*'):
+            if os.path.islink(lib):
+                os.unlink(lib)
+            else:
+                match = re.search(r'^(.*)((((\.so)\.\d+)\.\d+)\.\d+)$', lib)
+                if match:
+                    new_name = '%s_d%s' % (match.group(1), match.group(2))
+                    os.rename(lib, LIB_PATH + new_name)
+                    with chdir(LIB_PATH):
+                        links = ['%s_d%s' % (match.group(1), match.group(s))
+                                 for s in [3, 4, 5]]
+                        for link in links:
+                            if os.path.exists(link):
+                                os.unlink(link)
+                            os.symlink(new_name, link)
+    os.system('ldconfig -vXn %s' % LIB_PATH)
+
+
+def need_root(function):
+    if os.getuid() == 0:
+        return False
+    print "type your sudo password, please."
+    os.system("sudo python %s %s" % (sys.argv[0], function.__name__))
+
+    return True
+
+
+def help():
+    print "just run ./ubuntu_install, and watch the show,"
+    print "you may will be asked for your sudo password sometimes."
+
+
+class chdir:
+    def __init__(self, newdir):
+        self.newdir = newdir
+
+    def __enter__(self):
+        self.cwd = os.getcwd()
+        os.chdir(self.newdir)
+
+    def __exit__(self, type, value, traceback):
+        os.chdir(self.cwd)
+
+
+args = {}
+
+for i in globals().keys():
+    g = globals()[i]
+    if type(g) is FunctionType:
+        args[i] = g
+
+if len(sys.argv) > 1:
+    if sys.argv[1] in args:
+        args[sys.argv[1]]()
+    else:
+        help()
+
+else:
+    flow = (
+        install_dependencies,
+        compile_pythonqt,
+        install_pythonqt,
+        compile_extensions,
+        install_extensions,
+        config_debug
+    )
+    print "welcome to the pythonqt instalator for ubuntu,"
+    print "you may need to type your sudo password sometimes."
+    map(lambda f: f(), flow)
